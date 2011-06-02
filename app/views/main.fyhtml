@@ -1,0 +1,12 @@
+<html>
+  <head>
+  <title>FancyWiki v0.0.1</title>
+  </head>
+  <body>
+  Welcome to FancyWiki. This is a new experimental and self-hosted documentation Wiki written in Fancy for Fancy.
+  <br/>
+  <br/>
+  Things to check out:<br/>
+  #{links}
+  </body>
+</html>

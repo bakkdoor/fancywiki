@@ -1,0 +1,11 @@
+<html>
+  <head>
+  <title>FancyWiki v0.0.1 - Page: #{title}</title>
+  </head>
+  <body>
+  <h1>#{title}</h1>
+  <br/>
+  <br/>
+  #{content}
+  </body>
+</html>

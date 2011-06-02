@@ -1,0 +1,11 @@
+<form action="/save" method="post">
+  <fieldset>
+	  <label for="title">Editing '#{title}'</label>
+    <br/>
+	  <input type="text" id="title" name="title" value="#{title}">
+    <br/>
+    <textarea rows="20" cols="100" name="content" id="content">#{content}</textarea>
+    <br/>
+    Back to: #{back_link} or <input type="submit" value="SAVE">
+  </fieldset>
+</form>
