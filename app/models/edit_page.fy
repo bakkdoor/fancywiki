@@ -7,7 +7,8 @@ class EditPage : Page {
     locals = <[
       "title" => name,
       "content" => content,
-      "back_link" => (Page[""] link)
+      "back_link" => Page[""] link,
+      "menu" => Page Menu new render
     ]>
     Template new: "views/edit_page.fyhtml" . render: locals
   }

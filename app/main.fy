@@ -15,7 +15,7 @@ Page["Help"]
 
 before: { "request coming in" println }
 get: "/" do: {
-  Template new: "views/main.fyhtml" . render: <["links" => Page pages map: 'link . join: " - "]>
+  Template new: "views/main.fyhtml" . render: <["links" => Page Menu new render]>
 }
 
 # page handler
@@ -32,6 +32,12 @@ post: "/save" do: {
   p = params()
   title, content = p['title], p['content]
   Page[title] content: content
+  redirect(to(link_to: title))
+}
+
+post: "/new" do: {
+  p = params()
+  title = p['title]
   redirect(to(link_to: title))
 }
 

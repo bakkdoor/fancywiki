@@ -9,3 +9,4 @@
     Back to: #{back_link} or <input type="submit" value="SAVE">
   </fieldset>
 </form>
+#{menu}

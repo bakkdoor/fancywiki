@@ -16,7 +16,20 @@ class Page {
   }
 
   def render {
-    Template new: "views/page.fyhtml" . render: <["title" => name, "content" => content]>
+    Template new: "views/page.fyhtml" . render: <["title" => name, "content" => content, "menu" => Menu new render]>
+  }
+
+  def Page pages {
+    @@pages values
+  }
+
+  def Page [] name {
+    { @@pages = <[]> } unless: @@pages
+    if: (@@pages[name]) then: |page| {
+      page
+    } else: {
+      Page new: name
+    }
   }
 
   class Link {
@@ -31,16 +44,9 @@ class Page {
     }
   }
 
-  def Page pages {
-    @@pages values
-  }
-
-  def Page [] name {
-    { @@pages = <[]> } unless: @@pages
-    if: (@@pages[name]) then: |page| {
-      page
-    } else: {
-      Page new: name
+  class Menu {
+    def render {
+      Template new: "views/menu.fyhtml" . render: <["links" => Page pages sort: |a b| { a name <=>(b name) } . map: 'link . join: " - "]>
     }
   }
 }
