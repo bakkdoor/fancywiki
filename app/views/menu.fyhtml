@@ -2,3 +2,9 @@
 <br/>
 Things to check out:<br/>
 #{links}
+<br/><br/>
+<form action="/new" method="post">
+  <label for="title">Create a new page:</label>
+   <input type="text" id="title" name="title" value="">
+  <input type="submit" value="CREATE">
+</form>

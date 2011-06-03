@@ -3,6 +3,7 @@
   <title>FancyWiki v0.0.1 - Page: #{title}</title>
   </head>
   <body>
+  #{notifications}
   <h1>#{title}</h1>
   #{content}
   <br/>

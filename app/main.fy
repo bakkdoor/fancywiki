@@ -21,20 +21,29 @@ get: "/" do: {
 # default page
 Page["Index"] content: """
 Welcome to FancyWiki. This is a new experimental and self-hosted documentation Wiki written in Fancy for Fancy.
+<br/>
+You can link to other pages by using [[ and ]], e.g. [[Help]].
 """
+
+def cleanup_notifications: session {
+  session at: "info" put: nil
+  session at: "error" put: nil
+}
 
 # page handler
 get: /^\/([a-zA-Z0-9_]+)$/ do: |page| {
   p = Page[page]
-  if: (p content empty?) then: {
-    EditPage new: p . render
+  content = if: (p content empty?) then: {
+    EditPage new: p . render: request session: session
   } else: {
-    p render
+    p render: request session: session
   }
+  cleanup_notifications: session
+  content
 }
 
 get: /^\/([a-zA-Z0-9_]+)\/edit$/ do: |page| {
-  EditPage new: (Page[page]) . render
+  EditPage new: (Page[page]) . render: request session: session
 }
 
 post: /^\/([a-zA-Z0-9_]+)\/delete$/ do: |page| {
@@ -50,8 +59,13 @@ post: "/save" do: {
 }
 
 post: "/new" do: {
-  title = params['title]
-  redirect_to: $ Page[title]
+  try {
+    title = params['title]
+    redirect_to: $ Page[title]
+  } catch Page EmptyNameError => e {
+    session at: "error" put: "Page name can't be blank!"
+    redirect_to: $ Page["Index"]
+  }
 }
 
 not_found: { "Fancy doesn't know this ditty!" }

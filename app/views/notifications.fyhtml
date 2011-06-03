@@ -1,0 +1,4 @@
+<div id="notifications">
+  <div id="error">#{error}</div>
+  <div id="info">#{info}</div>
+</div>

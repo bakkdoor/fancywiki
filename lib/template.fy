@@ -13,6 +13,7 @@ class Template {
     { read_contents } unless: @contents
     rendered_contents = @contents
     locals each: |name val| {
+      val = val || { "" }
       pattern = "#" + "{" + name + "}"
       match rendered_contents {
         case Regexp new(pattern) ->

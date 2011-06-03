@@ -10,7 +10,20 @@ class PageRenderer {
     }
   }
 
-  def render {
-    Template["views/page.fyhtml"] render: <["title" => @page name, "content" => content, "menu" => Page Menu new render]>
+  def render: request session: session {
+    locals = <[
+      "title" => @page name,
+      "content" => content,
+      "menu" => Page Menu new render,
+      "notifications" => ""
+    ]>
+
+    error, info = session["error"], session["info"]
+    if: (error || info) then: {
+      notify_content = Template["views/notifications.fyhtml"] . render: <["info" => info, "error" => error]>
+      locals at: "notifications" put: notify_content
+    }
+
+    Template["views/page.fyhtml"] render: locals
   }
 }
