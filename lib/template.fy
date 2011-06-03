@@ -1,5 +1,7 @@
 class Template {
   @@templates = <[]>
+  @@caching = true
+
   def initialize: @filename {
   }
 
@@ -20,14 +22,22 @@ class Template {
     rendered_contents
   }
 
+  def Template caching: caching {
+    @@caching = caching
+  }
+
   def Template [] filename {
-    if: (@@templates[filename]) then: |t| {
-      t
+    if: @@caching then: {
+      if: (@@templates[filename]) then: |t| {
+        t
+      } else: {
+        t = Template new: filename
+        t read_contents
+        @@templates at: filename put: t
+        t
+      }
     } else: {
-      t = Template new: filename
-      t read_contents
-      @@templates at: filename put: t
-      t
+      Template new: filename
     }
   }
 }

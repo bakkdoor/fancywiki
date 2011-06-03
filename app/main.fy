@@ -10,6 +10,9 @@ configure: 'production with: { disable: 'show_errors }
 configure: ['production, 'development] with: {
   enable: 'logging
 }
+configure: 'development with: {
+  Template caching: false # disable caching in dev mode
+}
 
 get: "/" do: {
   Template["views/main.fyhtml"] render: <["links" => Page Menu new render]>
