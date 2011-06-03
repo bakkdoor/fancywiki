@@ -3,6 +3,19 @@ class Page {
   read_write_slots: ['content, 'created_at, 'updated_at]
   @@pages = <[]>
 
+  def Page pages {
+    @@pages values
+  }
+
+  def Page [] name {
+    { @@pages = <[]> } unless: @@pages
+    if: (@@pages[name]) then: |page| {
+      page
+    } else: {
+      Page new: name
+    }
+  }
+
   def initialize: @name content: @content ("") author: @author ("Anonymous") {
     @created_at = Time now
     @updated_at = Time now
@@ -19,17 +32,8 @@ class Page {
     Template new: "views/page.fyhtml" . render: <["title" => name, "content" => content, "menu" => Menu new render]>
   }
 
-  def Page pages {
-    @@pages values
-  }
-
-  def Page [] name {
-    { @@pages = <[]> } unless: @@pages
-    if: (@@pages[name]) then: |page| {
-      page
-    } else: {
-      Page new: name
-    }
+  def delete {
+    @@pages delete: @name
   }
 
   class Link {

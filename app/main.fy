@@ -11,15 +11,12 @@ configure: ['production, 'development] with: {
   enable: 'logging
 }
 
-Page["Help"]
-
-before: { "request coming in" println }
 get: "/" do: {
   Template new: "views/main.fyhtml" . render: <["links" => Page Menu new render]>
 }
 
 # page handler
-get: /\/([a-zA-Z0-9_]+)$/ do: |page| {
+get: /^\/([a-zA-Z0-9_]+)$/ do: |page| {
   p = Page[page]
   if: (p content empty?) then: {
     EditPage new: p . render
@@ -28,17 +25,25 @@ get: /\/([a-zA-Z0-9_]+)$/ do: |page| {
   }
 }
 
+get: /^\/([a-zA-Z0-9_]+)\/edit$/ do: |page| {
+  EditPage new: (Page[page]) . render
+}
+
+post: /^\/([a-zA-Z0-9_]+)\/delete$/ do: |page| {
+  Page[page] delete
+  redirect: "/"
+}
+
 post: "/save" do: {
-  p = params()
-  title, content = p['title], p['content]
-  Page[title] content: content
-  redirect(to(link_to: title))
+  title, content = params['title], params['content]
+  page = Page[title]
+  page content: content
+  redirect_to: page
 }
 
 post: "/new" do: {
-  p = params()
-  title = p['title]
-  redirect(to(link_to: title))
+  title = params['title]
+  redirect_to: $ Page[title]
 }
 
 not_found: { "Fancy doesn't know this ditty!" }

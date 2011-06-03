@@ -9,4 +9,7 @@
     Back to: #{back_link} or <input type="submit" value="SAVE">
   </fieldset>
 </form>
+<form action="/#{title}/delete" method="post">
+  <input type="submit" value="DELETE">
+</form>
 #{menu}

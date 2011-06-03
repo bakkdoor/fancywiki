@@ -5,6 +5,9 @@
   <body>
   <h1>#{title}</h1>
   #{content}
+  <br/>
+  <br/>
+  <a href="/#{title}/edit">EDIT</a>
+  #{menu}
   </body>
 </html>
-#{menu}
