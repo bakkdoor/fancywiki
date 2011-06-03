@@ -5,5 +5,5 @@ Fancy Package Specification new: "fancywiki" with: {
   description: "A Fancy Wiki software."
   homepage: "http://www.fancy-lang.org"
   version: "0.0.1"
-  dependencies: [["sinatra.fy"]]
+  dependencies: [["rkh/sinatra.fy"]]
 }
