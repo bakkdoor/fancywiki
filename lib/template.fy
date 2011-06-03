@@ -1,4 +1,5 @@
 class Template {
+  @@templates = <[]>
   def initialize: @filename {
   }
 
@@ -7,14 +8,26 @@ class Template {
   }
 
   def render: locals (<[]>) {
-    read_contents
+    { read_contents } unless: @contents
+    rendered_contents = @contents
     locals each: |name val| {
       pattern = "#" + "{" + name + "}"
-      match @contents {
+      match rendered_contents {
         case Regexp new(pattern) ->
-          @contents replace!: pattern with: val
+          rendered_contents = rendered_contents replace: pattern with: val
       }
     }
-    @contents
+    rendered_contents
+  }
+
+  def Template [] filename {
+    if: (@@templates[filename]) then: |t| {
+      t
+    } else: {
+      t = Template new: filename
+      t read_contents
+      @@templates at: filename put: t
+      t
+    }
   }
 }

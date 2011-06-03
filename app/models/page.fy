@@ -29,7 +29,7 @@ class Page {
   }
 
   def render {
-    Template new: "views/page.fyhtml" . render: <["title" => name, "content" => content, "menu" => Menu new render]>
+    Template["views/page.fyhtml"] render: <["title" => name, "content" => content, "menu" => Menu new render]>
   }
 
   def delete {
@@ -44,13 +44,13 @@ class Page {
       name = @page name
       title = name
       { title = "Index" } if: (name empty?)
-      Template new: "views/link.fyhtml" . render: <["title" => title, "url" => link_to: name]>
+      Template["views/link.fyhtml"] render: <["title" => title, "url" => link_to: name]>
     }
   }
 
   class Menu {
     def render {
-      Template new: "views/menu.fyhtml" . render: <["links" => Page pages sort_by: 'name . map: 'link . join: " - "]>
+      Template["views/menu.fyhtml"] render: <["links" => Page pages sort_by: 'name . map: 'link . join: " - "]>
     }
   }
 }

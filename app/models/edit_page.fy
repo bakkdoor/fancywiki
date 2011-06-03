@@ -10,6 +10,6 @@ class EditPage : Page {
       "back_link" => Page[""] link,
       "menu" => Page Menu new render
     ]>
-    Template new: "views/edit_page.fyhtml" . render: locals
+    Template["views/edit_page.fyhtml"] render: locals
   }
 }

@@ -12,7 +12,7 @@ configure: ['production, 'development] with: {
 }
 
 get: "/" do: {
-  Template new: "views/main.fyhtml" . render: <["links" => Page Menu new render]>
+  Template["views/main.fyhtml"] render: <["links" => Page Menu new render]>
 }
 
 # page handler
