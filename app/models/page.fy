@@ -50,7 +50,7 @@ class Page {
 
   class Menu {
     def render {
-      Template new: "views/menu.fyhtml" . render: <["links" => Page pages sort: |a b| { a name <=>(b name) } . map: 'link . join: " - "]>
+      Template new: "views/menu.fyhtml" . render: <["links" => Page pages sort_by: 'name . map: 'link . join: " - "]>
     }
   }
 }
