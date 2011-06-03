@@ -15,8 +15,13 @@ configure: 'development with: {
 }
 
 get: "/" do: {
-  Template["views/main.fyhtml"] render: <["links" => Page Menu new render]>
+  redirect: "/Index"
 }
+
+# default page
+Page["Index"] content: """
+Welcome to FancyWiki. This is a new experimental and self-hosted documentation Wiki written in Fancy for Fancy.
+"""
 
 # page handler
 get: /^\/([a-zA-Z0-9_]+)$/ do: |page| {

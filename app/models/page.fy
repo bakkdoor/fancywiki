@@ -1,3 +1,5 @@
+require: "page_renderer"
+
 class Page {
   read_slots: ['name, 'linked_pages, 'categories, 'author]
   read_write_slots: ['content, 'created_at, 'updated_at]
@@ -29,7 +31,7 @@ class Page {
   }
 
   def render {
-    Template["views/page.fyhtml"] render: <["title" => name, "content" => content, "menu" => Menu new render]>
+    PageRenderer new: self . render
   }
 
   def delete {
@@ -42,9 +44,7 @@ class Page {
 
     def render {
       name = @page name
-      title = name
-      { title = "Index" } if: (name empty?)
-      Template["views/link.fyhtml"] render: <["title" => title, "url" => link_to: name]>
+      Template["views/link.fyhtml"] render: <["title" => name, "url" => link_to: name]>
     }
   }
 
