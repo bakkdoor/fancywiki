@@ -8,3 +8,12 @@ Things to check out:<br/>
    <input type="text" id="title" name="title" value="">
   <input type="submit" value="CREATE">
 </form>
+
+<div id="save-pages">
+  <!-- <form action="/#{title}/save" method="post"> -->
+  <!--   <input type="submit" value="SAVE PAGE"> -->
+  <!-- </form> -->
+  <form action="/save-all" method="post">
+    <input type="submit" value="SAVE ALL PAGES">
+  </form>
+</div>

@@ -14,7 +14,7 @@ class PageRenderer {
     locals = <[
       "title" => @page name,
       "content" => content,
-      "menu" => Page Menu new render,
+      "menu" => Page Menu new render: <["title" => @page name]>,
       "notifications" => ""
     ]>
 

@@ -5,6 +5,9 @@ require: "../lib/helpers"
 require: "models/page"
 require: "models/edit_page"
 
+PERSISTENCE_DIR = File expand_path("../saved/", File dirname(__FILE__))
+Directory create!: PERSISTENCE_DIR
+
 configure: { enable: 'sessions }
 configure: 'production with: { disable: 'show_errors }
 configure: ['production, 'development] with: {
@@ -48,6 +51,20 @@ get: /^\/([a-zA-Z0-9_]+)\/edit$/ do: |page| {
 
 post: /^\/([a-zA-Z0-9_]+)\/delete$/ do: |page| {
   Page[page] delete
+  redirect: "/"
+}
+
+post: /^\/([a-zA-Z0-9_]+)\/save/ do: |page| {
+  p = Page[page]
+  p save_to: PERSISTENCE_DIR
+  redirect_to: p
+}
+
+post: "/save-all" do: {
+  Page pages size println
+  Page pages each: |p| {
+    p save_to: PERSISTENCE_DIR
+  }
   redirect: "/"
 }
 

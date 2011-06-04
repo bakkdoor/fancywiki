@@ -43,6 +43,14 @@ class Page {
     @@pages delete: @name
   }
 
+  def save_to: dirname {
+    filename = File expand_path(@name + ".txt", dirname)
+    "Saving to file: #{filename}" println
+    File open: filename modes: ['truncate] with: |f| {
+      f writeln: @content
+    }
+  }
+
   class Link {
     def initialize: @page {
     }
@@ -54,8 +62,10 @@ class Page {
   }
 
   class Menu {
-    def render {
-      Template["views/menu.fyhtml"] render: <["links" => Page pages sort_by: 'name . map: 'link . join: " - "]>
+    def render: locals (<[]>) {
+      locals2 =  <["links" => Page pages sort_by: 'name . map: 'link . join: " - "]>
+      locals2 merge!: locals
+      Template["views/menu.fyhtml"] render: locals2
     }
   }
 }
