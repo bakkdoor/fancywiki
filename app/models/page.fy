@@ -11,7 +11,7 @@ class Page {
     @@pages values
   }
 
-  def Page [] name {
+  def Page [name] {
     { @@pages = <[]> } unless: @@pages
     if: (@@pages[name]) then: |page| {
       page

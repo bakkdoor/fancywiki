@@ -1,8 +1,10 @@
 class Template {
   @@templates = <[]>
   @@caching = true
+  @@path_prefix = nil
 
   def initialize: @filename {
+    { @filename = "#{@@path_prefix}/#{@filename}" } if: @@path_prefix
   }
 
   def read_contents {
@@ -23,11 +25,15 @@ class Template {
     rendered_contents
   }
 
+  def Template path_prefix: prefix {
+    @@path_prefix = prefix
+  }
+
   def Template caching: caching {
     @@caching = caching
   }
 
-  def Template [] filename {
+  def Template [filename] {
     if: @@caching then: {
       if: (@@templates[filename]) then: |t| {
         t

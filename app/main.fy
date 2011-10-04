@@ -5,6 +5,8 @@ require: "../lib/helpers"
 require: "models/page"
 require: "models/edit_page"
 
+WIKI_ROOT = File expand_path(".", File dirname(__FILE__))
+Template path_prefix: WIKI_ROOT
 PERSISTENCE_DIR = File expand_path("../saved/", File dirname(__FILE__))
 Directory create!: PERSISTENCE_DIR
 

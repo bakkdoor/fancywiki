@@ -3,7 +3,7 @@ def wiki_word: name {
 }
 
 def link_to: page_name {
-  "http://localhost:4567/" + (wiki_word: page_name)
+  wiki_word: page_name
 }
 
 def redirect_to: page {
