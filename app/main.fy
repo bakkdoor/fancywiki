@@ -88,4 +88,4 @@ post: "/new" do: {
   }
 }
 
-not_found: { "Fancy doesn't know this ditty!" }
+not_found: { "Invalid page. Sorry :(" }
