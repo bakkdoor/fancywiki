@@ -1,0 +1,7 @@
+FancyWiki
+Simple sample wiki written in Fancy using Sinatra.fy (see: https://github.com/rkh/sinatra.fy)
+
+This is a sample sinatra.fy application that implements a really basic wiki.
+For educational purposes only.
+
+You can do with this whatever you want.
