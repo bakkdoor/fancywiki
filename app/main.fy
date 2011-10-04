@@ -16,6 +16,7 @@ configure: ['production, 'development] with: {
 configure: 'development with: {
   Template caching: false # disable caching in dev mode
 }
+set: 'port to: 3000
 
 get: "/" do: {
   redirect: "/Index"
